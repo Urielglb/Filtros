@@ -2,22 +2,24 @@
 
 <html>
 <head>
-    <meta charset = "utf=8"/>
+    <meta charset="utf=8"/>
     <title>Menu Filtro</title>
     <link rel="stylesheet" type="text/css" href="estilo.css">
 </head>
 <body>
     <h1>Filtros</h1>
-    <p>Los filtos que se pueden aplicar son:</p>
-    <ul>
-		<li style="color:#FF0000">Rojo</li>
-        <li style="color:#0000FF">Azul</li>
-        <li style="color:#00FF00">Verde</li>
-        <li style="color:#3498DB;">Mosaico</li>
-	</ul>
+    <p>Seleccione el filtro que desea aplicar:</p>
+    <select>
+        <option value="red">Rojo</option>
+        <option value ="green">Verde</option>Verde</option>
+        <option value="blue">Azul</option>
+        <option value ="mosaico">Mosaico</option>
+    </select>
     <p>Ingrese la imagen a la cual desea aplicar el filtro:</p>
-    <div id="imagen">
-        <canvas id="canvas"width="800" height="600"></canvas>
+    <input type="file" id="files" name="imagen" single></input>
+    <div id="canvas">
+        <canvas id="imagen"></canvas>
     </div>
+    
 </body>
 </html>
