@@ -1,5 +1,5 @@
 let filtro = [255,0,0];
-let imagen = new Image();
+let imagenRespaldo = new Image();
 let mosaico = false;
 function recibeColor(color){
 		filtro=[0,0,0];
@@ -9,20 +9,23 @@ function recibeColor(color){
 			filtro[1] = 255;
 		}else if(color.value=="blue"){
 			filtro[2] = 255;
-		}else{
-			mosaico = true;
 		}
 }
-
+function conseguirContexto(){
+	const canvas = document.getElementById("imagen");
+	const ctx = canvas.getContext("2d");
+	return ctx;
+}
 function recibeImagen(evento){
 	let archivo = evento.files[0];
 	if(archivo.type.match('image.*')){
 		let lector = new FileReader();
 		lector.onload = (function() {
 			return function(e) {
-			  let canvas = document.getElementById("imagen");
-			  let ctx = canvas.getContext("2d");
-			  imagen.src = e.target.result;
+			  const ctx = conseguirContexto();
+			  const imagen = new Image();
+			  imagenRespaldo = imagen;
+			  imagen.src = lector.result;
 			  ctx.canvas.width = imagen.naturalWidth;
 			  ctx.canvas.height = imagen.naturalHeight;
 			  ctx.drawImage(imagen,0,0);
@@ -32,10 +35,9 @@ function recibeImagen(evento){
 	}
 }
 function aplicaFiltro(){
-	let c = document.getElementById("imagen");
-	let ctx = c.getContext("2d");
-	let imgData = ctx.getImageData(0, 0, c.width, c.height);
-	
+	const ctx = conseguirContexto();
+	ctx.drawImage(imagenRespaldo,0,0);
+	let imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
 	if(!mosaico){
 		for (let i = 0; i < imgData.data.length; i += 4) {
 		  imgData.data[i] = filtro[0]-imgData.data[i];
@@ -46,26 +48,13 @@ function aplicaFiltro(){
 	}
 	
 	ctx.putImageData(imgData, 0, 0);
-	for (var i = 0; i < imgData.data.length; i += 4) {
-	  imgData.data[i] = 255-imgData.data[i];
-	  imgData.data[i+1] = 255-imgData.data[i+1];
-	  imgData.data[i+2] = 255-imgData.data[i+2];
-	  imgData.data[i+3] = 255;
-	}
-	
-	ctx.putImageData(imgData, 0, 0); 
-
 }
-
 function borraImagen(){
-	let canvas = document.getElementById("imagen");
-	let ctx = canvas.getContext("2d");
-	ctx.clearRect(0,0,canvas.width,canvas.height);
+	const ctx = conseguirContexto();
+	ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
 }
 
 function borraFiltro(){
-	let canvas = document.getElementById("imagen");
-	let ctx = canvas.getContext("2d");
-	ctx.drawImage(imagen)
+	const ctx = conseguirContexto();
+	ctx.drawImage(imagenRespaldo,0,0);
 }
-
