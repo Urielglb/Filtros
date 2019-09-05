@@ -13,6 +13,7 @@ function recibeColor(color){
 			mosaico = true;
 		}
 }
+
 function recibeImagen(evento){
 	let archivo = evento.files[0];
 	if(archivo.type.match('image.*')){
@@ -45,7 +46,17 @@ function aplicaFiltro(){
 	}
 	
 	ctx.putImageData(imgData, 0, 0);
+	for (var i = 0; i < imgData.data.length; i += 4) {
+	  imgData.data[i] = 255-imgData.data[i];
+	  imgData.data[i+1] = 255-imgData.data[i+1];
+	  imgData.data[i+2] = 255-imgData.data[i+2];
+	  imgData.data[i+3] = 255;
+	}
+	
+	ctx.putImageData(imgData, 0, 0); 
+
 }
+
 function borraImagen(){
 	let canvas = document.getElementById("imagen");
 	let ctx = canvas.getContext("2d");
@@ -57,3 +68,4 @@ function borraFiltro(){
 	let ctx = canvas.getContext("2d");
 	ctx.drawImage(imagen)
 }
+
