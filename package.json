@@ -1,0 +1,25 @@
+{
+  "name": "filtros",
+  "version": "1.0.0",
+  "description": "Aplica filtros a imagenes",
+  "main": "filtros.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urielglb/Filtros.git"
+  },
+  "author": "Uriel & Mauricio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Urielglb/Filtros/issues"
+  },
+  "homepage": "https://github.com/Urielglb/Filtros#readme",
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
+}

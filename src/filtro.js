@@ -1,31 +1,35 @@
-let filtro = [255,0,0]; //variable global que guardará los valores del filtroa aplicar, inicia en los valores del filtro rojo pues esta en la opción default del programa
-let imagenRespaldo = new Image();//variable que guardará un respaldo de la imagén actual con la que se trabja para de esta forma recuperar los colores orgiginales de esta al querer borrar un filtro
+let imagenRespaldo = new Image();//variable que guardará un respaldo de la imagén actual con la que se trabja para de esta forma recuperar los colores orginales de esta al querer borrar un filtro
 
 /**
- * Método que se encargará de recibir el valor del select que pregunta el filtro que se desea aplicar a la imagen y de guardar los valores RGB de dicho en el arreglo filtro
- * Se ejecuta cuando el valor del select cambia  y solamente recibe el objeto select
- * @param {select} color 
+ * Método que se encargará de recibir el valor del select que pregunta el filtro que se desea aplicar a la imagen y de guardar los valores RGB de dicho filtro en un  arreglo que creará
+ * Se ejecuta cuando se mande llamar dentro del método aplicaFiltro y regresará el arreglo donde guardó los valores del filtro a aplicar
+ * @return {array} filtro 
  */
 
-function recibeColor(color){
-		filtro=[0,0,0];
-        if(color.value=="red"){
-			filtro[0] = 255;
-		}else if(color.value=="green"){
-			filtro[1] = 255;
-		}else if(color.value=="blue"){
-			filtro[2] = 255;
-		}
+function recibeColor() {
+	const color = document.getElementById("filtro");
+	let filtro=[0,0,0];
+	if(color.value=="red"){
+		filtro[0] = 255;
+	}else if(color.value=="green"){
+		filtro[1] = 255;
+	}else if(color.value=="blue"){
+		filtro[2] = 255;
+	}
+	return filtro;
 }
+
 /**
  * Método para saber si el filtro que se desea aplicar en la imagen es el filtro mosaico
- * Únicamente regresa si todos los valores del arreglo son iguales a cero
+ * unicamente regresa si todos los valores del arreglo son iguales a cero
+ * Se mandará llamar en el método aplicaFiltro y recibe el arreglo con los valores del filtro
+ * @param {array} filtro
  * @return {boolean} mosaico
  */
 
 function filtroMosaico(){
-	mosaico = (filtro[0] == 0 & filtro[1] == 0 & filtro[2] == 0)
-	return mosaico
+	const mosaico = (filtro[0] == 0 & filtro[1] == 0 & filtro[2] == 0);
+	return mosaico;
 }
 
 /**
@@ -58,7 +62,7 @@ function recibeImagen(evento){
 			  ctx.canvas.width = imagen.naturalWidth;
 			  ctx.canvas.height = imagen.naturalHeight;
 			  ctx.drawImage(imagen,0,0);
-			})
+			});
 		lector.readAsDataURL(archivo);
 	}
 }
@@ -72,7 +76,8 @@ function aplicaFiltro(){
 	const ctx = getContexto();
 	ctx.drawImage(imagenRespaldo,0,0);
 	let imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-	if(!filtroMosaico()){
+	let filtro = recibeColor();
+	if(!filtroMosaico(filtro)){
 		for (let i = 0; i < imgData.data.length; i += 4) {
 		  imgData.data[i] = filtro[0]-imgData.data[i];
 		  imgData.data[i+1] = filtro[1]-imgData.data[i+1];
@@ -101,3 +106,4 @@ function borraFiltro(){
 	const ctx = getContexto();
 	ctx.drawImage(imagenRespaldo,0,0);
 }
+
