@@ -1,13 +1,13 @@
 {
   "name": "filtros",
   "version": "1.0.0",
-  "description": "Aplica filtros a imagenes",
+  "description": "Aplica un filtro a una imagen",
   "main": "filtros.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/Urielglb/Filtros#readme",
   "devDependencies": {
-    "mocha": "^6.2.0"
+    "jasmine": "^3.4.0"
   }
 }
