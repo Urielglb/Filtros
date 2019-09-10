@@ -5,7 +5,7 @@ describe("Pruebas para comprobar el color de acuerdo al arreglo", function() {
   
     it("red test", function() {
       
-      filtrored = [255,0,0];
+      filtrored = [1,0,0];
       
       expect(filtro.recibeColor("red")).toEqual(filtrored);
       
@@ -13,7 +13,7 @@ describe("Pruebas para comprobar el color de acuerdo al arreglo", function() {
     
     it("green test", function() {
       
-      filtrogreen = [0,255,0];
+      filtrogreen = [0,1,0];
       
       expect(filtro.recibeColor("green")).toEqual(filtrogreen);
       
@@ -21,7 +21,7 @@ describe("Pruebas para comprobar el color de acuerdo al arreglo", function() {
     
     it("blue test", function() {
       
-      filtroblue = [0,0,255];
+      filtroblue = [0,0,1];
       
       expect(filtro.recibeColor("blue")).toEqual(filtroblue);
       

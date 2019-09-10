@@ -8,11 +8,11 @@
 function recibeColor(color) {
 	let filtro=[0,0,0];
 	if(color=="red"){
-		filtro[0] = 255;
+		filtro[0] = 1;
 	}else if(color=="green"){
-		filtro[1] = 255;
+		filtro[1] = 1;
 	}else if(color=="blue"){
-		filtro[2] = 255;
+		filtro[2] = 1;
 	}
 	return filtro;
 }
@@ -89,9 +89,9 @@ function aplicaFiltro(){
 	let filtro = recibeColor(valor);
 	if(valor != undefined){
 		for (let i = 0; i < imgData.data.length; i += 4) {
-		  imgData.data[i] = filtro[0]-imgData.data[i];
-		  imgData.data[i+1] = filtro[1]-imgData.data[i+1];
-		  imgData.data[i+2] = filtro[2]-imgData.data[i+2];
+		  imgData.data[i] = filtro[0]*imgData.data[i];
+		  imgData.data[i+1] = filtro[1]*imgData.data[i+1];
+		  imgData.data[i+2] = filtro[2]*imgData.data[i+2];
 		  imgData.data[i+3] = 255;
 		}
 	} else {
