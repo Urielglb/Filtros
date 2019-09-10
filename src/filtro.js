@@ -10,11 +10,11 @@ function recibeColor() {
 	const color = document.getElementById("filtro");
 	let filtro=[0,0,0];
 	if(color.value=="red"){
-		filtro[0] = 255;
+		filtro[0] = 1;
 	}else if(color.value=="green"){
-		filtro[1] = 255;
+		filtro[1] = 1;
 	}else if(color.value=="blue"){
-		filtro[2] = 255;
+		filtro[2] = 1;
 	}
 	return filtro;
 }
@@ -79,9 +79,9 @@ function aplicaFiltro(){
 	let filtro = recibeColor();
 	if(!filtroMosaico(filtro)){
 		for (let i = 0; i < imgData.data.length; i += 4) {
-		  imgData.data[i] = filtro[0]-imgData.data[i];
-		  imgData.data[i+1] = filtro[1]-imgData.data[i+1];
-		  imgData.data[i+2] = filtro[2]-imgData.data[i+2];
+		  imgData.data[i] = filtro[0]*imgData.data[i];
+		  imgData.data[i+1] = filtro[1]*imgData.data[i+1];
+		  imgData.data[i+2] = filtro[2]*imgData.data[i+2];
 		  imgData.data[i+3] = 255;
 		}
 	}
