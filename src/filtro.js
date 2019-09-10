@@ -1,4 +1,3 @@
-let imagenRespaldo = new Image();//variable que guardará un respaldo de la imagén actual con la que se trabja para de esta forma recuperar los colores orginales de esta al querer borrar un filtro
 
 /**
  * Método que se encargará de recibir el valor del select que pregunta el filtro que se desea aplicar a la imagen y de guardar los valores RGB de dicho filtro en un  arreglo que creará
@@ -6,14 +5,13 @@ let imagenRespaldo = new Image();//variable que guardará un respaldo de la imag
  * @return {array} filtro 
  */
 
-function recibeColor() {
-	const color = document.getElementById("filtro");
+function recibeColor(color) {
 	let filtro=[0,0,0];
-	if(color.value=="red"){
+	if(color=="red"){
 		filtro[0] = 255;
-	}else if(color.value=="green"){
+	}else if(color=="green"){
 		filtro[1] = 255;
-	}else if(color.value=="blue"){
+	}else if(color=="blue"){
 		filtro[2] = 255;
 	}
 	return filtro;
@@ -27,9 +25,12 @@ function recibeColor() {
  * @return {boolean} mosaico
  */
 
-function filtroMosaico(){
-	const mosaico = (filtro[0] == 0 & filtro[1] == 0 & filtro[2] == 0);
-	return mosaico;
+function filtroMosaico(filtro){
+	const ctx = getContexto();
+	ctx.drawImage(imagenRespaldo,0,0);
+	let imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+	return;
+//TODO: algoritmo
 }
 
 /**
@@ -76,14 +77,25 @@ function aplicaFiltro(){
 	const ctx = getContexto();
 	ctx.drawImage(imagenRespaldo,0,0);
 	let imgData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-	let filtro = recibeColor();
-	if(!filtroMosaico(filtro)){
+	var valor;
+	const color = document.getElementById("filtro");
+	if(color.value=="red"){
+		valor = "red";
+	}else if(color.value=="green"){
+		valor = "green";
+	}else if(color.value=="blue"){
+		valor = "blue";
+	}
+	let filtro = recibeColor(valor);
+	if(valor != undefined){
 		for (let i = 0; i < imgData.data.length; i += 4) {
 		  imgData.data[i] = filtro[0]-imgData.data[i];
 		  imgData.data[i+1] = filtro[1]-imgData.data[i+1];
 		  imgData.data[i+2] = filtro[2]-imgData.data[i+2];
 		  imgData.data[i+3] = 255;
 		}
+	} else {
+		imgData = filtroMosaico(filtro);
 	}
 	
 	ctx.putImageData(imgData, 0, 0);
@@ -107,3 +119,4 @@ function borraFiltro(){
 	ctx.drawImage(imagenRespaldo,0,0);
 }
 
+module.exports = { recibeColor: recibeColor}
