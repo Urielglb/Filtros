@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jasmine"
+	"docs:build": "documentation build src/** -f html -o docs"
   },
   "repository": {
     "type": "git",
