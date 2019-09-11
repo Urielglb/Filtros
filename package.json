@@ -1,0 +1,25 @@
+{
+  "name": "filtros",
+  "version": "1.0.0",
+  "description": "Aplica un filtro a una imagen",
+  "main": "filtros.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Urielglb/Filtros.git"
+  },
+  "author": "Uriel & Mauricio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Urielglb/Filtros/issues"
+  },
+  "homepage": "https://github.com/Urielglb/Filtros#readme",
+  "devDependencies": {
+    "jasmine": "^3.4.0"
+  }
+}

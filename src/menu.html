@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta charset = "utf=8"/>
+    <meta charset="utf-8"/>
     <title>Menu Filtro</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <script type="text/javascript" src="filtro.js">
+        let imagenRespaldo = new Image(); //variable que guardará un respaldo de la imagén actual 
+    </script>
 </head>
 <body>
-
+    <h1>Aplica un filtro a una imagen</h1>
+    <p>Seleccione el filtro que desea aplicar:</p>
+    <select id="filtro">
+        <option value="red">Rojo</option>
+        <option value ="green">Verde</option>Verde</option>
+        <option value="blue">Azul</option>
+        <option value ="mosaico">Mosaico</option>
+    </select>
+    <p>Ingrese la imagen a la cual desea aplicar el filtro:</p>
+    <input
+        type="file" id="files" name="imagen"  onchange="recibeImagen(this);" single>
+    </input>
+    <div>
+        <canvas id="imagen"></canvas>
+    </div>
+    <div>
+        <input type = "button" value = "Aplica filtro" onclick = "aplicaFiltro();">
+        <input type = "button" value = "Borrar filtro actual" onclick = "borraFiltro();">
+        <input type = "button" value = "Borrar imagen actual" onclick = "borraImagen();">
+    </div>
 
 </body>
 </html>

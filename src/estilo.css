@@ -1,0 +1,17 @@
+body{
+background-color:#154360;    
+}
+p{
+	font-family:"Courier New",Courier,monospace;
+	color:#3498DB;
+}
+h1{
+	font-family: "Courier New",Courier,monospace;
+	color:#3498DB;
+	text-align: center;
+}
+canvas{
+	background-color: #2980B9;
+    height: 600px;
+    width: 800px;
+}
